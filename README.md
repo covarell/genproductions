@@ -32,13 +32,13 @@ https://twiki.cern.ch/twiki/bin/view/CMS/Rivet#Setting_Rivet_in_CMSSW
 https://github.com/multibosons/polarisationcomparison/blob/main/Rivet_Analysis_Yoda/COMETA_ZZ_production_analysis_Rivet3.cc
 and place in the directory: Rivet/SMP/src
 
-- create a directory named Configuration/GenTest/python and copy ../../Pythia8_fragment_(No)Matching.py, in case of jet-binned (inclusive) running, into this directory
+- create a directory named Configuration/GenTest/python and copy two files from ../../ into this directory: 1) rivet_customise.py 2) Pythia8_fragment_(no)Matching.py, in case of jet-binned (inclusive) running.
 
 - Now do "scram b"
 
 All the times:
 
-- Edit cmsDriver.sh changing to Pythia8_fragment_(No)Matching.py if needed
+- Move cmsDriver.sh inside the CMSSW_12_4_8 directory: also edit it changing Pythia8_fragment_(no)Matching.py if needed
 
 - run
 ```
