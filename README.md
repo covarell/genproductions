@@ -56,6 +56,6 @@ source runEvents.sh <pol>
 
 - Do:
 ```
-./yodaToPlain.pl out<pol>.yoda
+./yodaToPlain.pl out<pol>.yoda Madgraph5_lops_<pol in lowercase>.dat
 ```
 to change yoda output to the plain output desired by the COMETA authors.
