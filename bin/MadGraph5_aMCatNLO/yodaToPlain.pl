@@ -91,7 +91,7 @@ foreach $var (@vars) {
 	    if ($entry =~ /000/ && !($entry =~ /Total/) && !($entry =~ /flow/) && !($entry =~ /ScaledBy/) && !($entry =~ /Mean/) && !($entry =~ /Area/)) {   ## only actual histo entries
 		@splitentry = split('\t', $entry);
 		my $binwidth = $splitentry[1] - $splitentry[0];  print "Bin width = ", $binwidth, "\n";
-		print FH $ientry+1 . "\t" . $splitentry[0] . "\t" . $splitentry[1] . "\t" . $splitentry[2]/$binwidth . "\t" .  $splitentry[3]/$binwidth . "\t";
+		print FH $ientry-12 . "\t" . $splitentry[0] . "\t" . $splitentry[1] . "\t" . $splitentry[2]/$binwidth . "\t" .  $splitentry[3]/$binwidth . "\t";
 		@splitmurmuf05 = split('\t', $murmuf05[$ientry]);
 		print FH $splitmurmuf05[2]/$binwidth . "\t";
 		@splitmur05 = split('\t', $mur05[$ientry]);
