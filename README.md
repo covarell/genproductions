@@ -1,6 +1,10 @@
 # genproductions
 Generator fragments for MC production - COMETA ZZ polarization study
 
+Checkout with the "GEN trick" otherwise it will take hours to complete:
+```
+git clone -b zzpol --depth=1 --single-branch git@github.com:covarell/genproductions.git
+```
 All the code is in genproductions/bin/MadGraph5_aMCatNLO
 
 # Generating gridpacks
