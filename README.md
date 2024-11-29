@@ -38,7 +38,9 @@ and place in the directory: Rivet/SMP/src
 
 All the times:
 
-- Move cmsDriver.sh inside the CMSSW_12_4_8 directory: also edit it changing Pythia8_fragment_(no)Matching.py if needed
+- Move cmsDriver.sh, runEvents.sh and yodaToPlain.pl inside the CMSSW_12_4_8/src directory.
+
+- Edit cmsDriver.sh by changing Pythia8_fragment_(no)Matching.py if needed
 
 - run
 ```
