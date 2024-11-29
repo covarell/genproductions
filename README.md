@@ -44,7 +44,7 @@ this will generate a file called zzpol_cfg.py. Edit this with the correct gridpa
 
 - Edit runEvents.sh with the correct paths and run it as:
 ```
-bash runEvents.sh <pol>
+source runEvents.sh <pol>
 ```
 (either interactively or on condor queues). This will give a file named `out<pol>.yoda` .
 
