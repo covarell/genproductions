@@ -8,8 +8,8 @@ externalLHEProducer = cms.EDProducer("ExternalLHEProducer",
  scriptName = cms.FileInPath('GeneratorInterface/LHEInterface/data/run_generic_tarball_cvmfs.sh')
 )
 
-from Configuration.Generator.Pythia8CommonSettings_cfi import *
-from Configuration.Generator.MCTunes2017.PythiaCP5Settings_cfi import *
+#from Configuration.Generator.Pythia8CommonSettings_cfi import *
+#from Configuration.Generator.MCTunes2017.PythiaCP5Settings_cfi import *
 #from Configuration.Generator.Pythia8aMCatNLOSettings_cfi import *
 #from Configuration.Generator.PSweightsPythia.PythiaPSweightsSettings_cfi import *
 
@@ -20,8 +20,8 @@ generator = cms.EDFilter("Pythia8HadronizerFilter",
     pythiaHepMCVerbosity = cms.untracked.bool(False),
     comEnergy = cms.double(13000.),
     PythiaParameters = cms.PSet(
-        pythia8CommonSettingsBlock,
-        pythia8CP5SettingsBlock,
+ #       pythia8CommonSettingsBlock,
+ #       pythia8CP5SettingsBlock,
         processParameters = cms.vstring(
             'JetMatching:setMad = off',
             'JetMatching:scheme = 1',
@@ -34,13 +34,30 @@ generator = cms.EDFilter("Pythia8HadronizerFilter",
             'JetMatching:nQmatch = 5', #4 corresponds to 4-flavour scheme (no matching of b-quarks), 5 for 5-flavour scheme
             'JetMatching:nJetMax = 2', #number of partons in born matrix element for highest multiplicity
             'JetMatching:doShowerKt = off', #off for MLM matching, turn on for shower-kT matching
-            'HadronLevel:Hadronize  = off', 
+            'Main:timesAllowErrors = 10000',
+            'Check:epTolErr = 0.01',
+            'Beams:setProductionScalesFromLHEF = off',
+            'SLHA:minMassSM = 1000.',
+            'ParticleDecays:limitTau0 = on',
+            'ParticleDecays:tau0Max = 10',
+            'HadronLevel:all = off', 
             'PartonLevel:MPI = off', 
-            'ParticleDecays:allowPhotonRadiation = off', 
+            'TimeShower:QEDshowerByGamma = off',
+            'Tune:pp 21',  # "ATLAS A14 central tune with NNPDF2.3LO" [default=14, Monash 2013]
+            'PDF:pSet 13' # NNPDF2.3 QCD+QED LO alpha_s(M_Z) = 0.130
         ),
         parameterSets = cms.vstring(
-            'pythia8CommonSettings',
-            'pythia8CP5Settings',
+          #  'pythia8CommonSettings',
+          #  'pythia8CP5Settings',
+            'processParameters',
+        )
+    )
+)
+
+        ),
+        parameterSets = cms.vstring(
+  #          'pythia8CommonSettings',
+  #          'pythia8CP5Settings',
             'processParameters',
         )
     )

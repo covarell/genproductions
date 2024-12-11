@@ -31,7 +31,7 @@ generator = cms.EDFilter("Pythia8HadronizerFilter",
             'ParticleDecays:tau0Max = 10',
             'HadronLevel:all = off', 
             'PartonLevel:MPI = off', 
-            'ParticleDecays:allowPhotonRadiation = off',
+            'TimeShower:QEDshowerByGamma = off',
             'Tune:pp 21',  # "ATLAS A14 central tune with NNPDF2.3LO" [default=14, Monash 2013]
             'PDF:pSet 13' # NNPDF2.3 QCD+QED LO alpha_s(M_Z) = 0.130
         ),
