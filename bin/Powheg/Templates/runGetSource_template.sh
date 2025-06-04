@@ -152,6 +152,7 @@ sed -i -e "s#FFLAGS  = #FFLAGS  = -std=legacy #g" virtual/Source/IREGI/src/qcdlo
 sed -i -e "s#FFLAGS        = #FFLAGS        = -std=legacy #g" madgraph/dhelas3.2/Makefile
 sed -i -e "s#FFLAGS = #FFLAGS = -std=legacy #g" QCDLoop-1.9/makefile
 sed -i -e "s#FFLAGS        = #FFLAGS        = -std=legacy #g" QCDLoop-1.9/ff/makefile
+sed -i -e "s#length-132#length-none#g" QCDLoop-1.9*/ff/makefile
 sed -i -e "s#FFLAGS  = #FFLAGS  = -std=legacy #g" QCDLoop-1.9/ql/makefile
 sed -i -e "s#FFLAGS = #FFLAGS = -std=legacy #g" QCDLoop-1.9-gfortran/makefile
 sed -i -e "s#FFLAGS        = #FFLAGS        = -std=legacy #g" QCDLoop-1.9-gfortran/ff/makefile

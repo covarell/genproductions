@@ -185,13 +185,6 @@ def runGetSource_patch_6(process) :
     "WWJ" : "cp Makefile Makefile.orig\n \
 cat Makefile.orig | sed -e \"s#FASTJET_CONFIG=.\+#FASTJET_CONFIG=$(scram tool info fastjet | grep BASE | cut -d \"=\" -f2)/bin/fastjet-config#g\" | sed -e \"s#\#\ FASTJET_CONFIG#FASTJET_CONFIG#g\" | sed -e \"s#\#\ LIBSFASTJET#LIBSFASTJET#g\" | sed -e \"s#\#\ FJCXXFLAGS#FJCXXFLAGS#g\" > Makefile\n \
 cd ${WORKDIR}/${name}/POWHEG-BOX/MATRIXStuff\n \
-sed -i -e 's#python#python3#g' matrix\n \
-sed -i -e 's/print /print ("") # print /g' matrix\n \
-sed -i -e 's#python#python3#g' bin/*\n \
-sed -i -e 's/print /print("") # print /g' bin/*\n \
-sed -i -e 's#python#python3#g' bin/modules/*\n \
-sed -i -e 's/print /print("") # print /g' bin/modules/*\n \
-./matrix --minnlo_interface\n \
 cd -\n \
 cd ${WORKDIR}/${name}\n \
 ln -s /cvmfs/cms-griddata.cern.ch/gen/Run2UL_powheg_v2/WW_MiNNLO_2loop_grids_reduced1/TWOLOOP_GRIDS_reg1 TWOLOOP_GRIDS_reg1\n \
@@ -238,8 +231,17 @@ cd -\n \
 source /cvmfs/cms.cern.ch/${SCRAM_ARCH}/external/cmake/3.10.0/etc/profile.d/init.sh",
     "gg4l" : "cp Makefile Makefile.orig\n \
 cat Makefile.orig | sed -e \"s#FASTJET_CONFIG=.\+#FASTJET_CONFIG=$(scram tool info fastjet | grep BASE | cut -d \"=\" -f2)/bin/fastjet-config#g\" | sed -e \"s#\#\ FASTJET_CONFIG#FASTJET_CONFIG#g\" > Makefile\n \
+sed -i -e 's#pwhg_main-$(COMPILER)#pwhg_main#g' Makefile \n \
+sed -i -e 's#-o $@#-o pwhg_main#g' Makefile \n \
+sed -i -e \"s#OL_PATH=.\+#OL_PATH=\$(PWD)/../OpenLoopsStuff/OpenLoops/#g\" Makefile\n \
+sed -i -e 's#/afs/cern.ch/work/a/alioli/private/#$(PWD)/../MATRIXStuff/external/#g' Makefile \n \
+sed -i -e 's#external/cln#external/cln-install#g' Makefile \n \
+sed -i -e 's#external/ginac#external/ginac-install#g' Makefile \n \
+sed -i -e 's/OL_PROCS+=ppllll2_nf/# OL_PROCS+=ppllll2_nf/g' Makefile \n \
 cd ${WORKDIR}/${name}/POWHEG-BOX/MATRIXStuff\n \
 sed -i -e 's#python#python3#g' matrix\n \
+sed -i -e '/qqVVamp_processes/ s/MiNNLO/gg4l/' matrix \n \
+sed -i -e 's/install_openloops = True/install_openloops = False/g' matrix \n \
 sed -i -e 's/print /print ("") # print /g' matrix\n \
 sed -i -e 's#python#python3#g' bin/*\n \
 sed -i -e 's/print /print("") # print /g' bin/*\n \
