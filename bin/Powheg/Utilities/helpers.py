@@ -236,11 +236,22 @@ sed -i -e 's/print /print("") # print /g' bin/modules/*\n \
 ./matrix --minnlo_interface\n \
 cd -\n \
 source /cvmfs/cms.cern.ch/${SCRAM_ARCH}/external/cmake/3.10.0/etc/profile.d/init.sh",
-    "gg4l" : "cp Makefile Makefile.orig\n \
+    "gg4l" : "echo \"Adding CHAPLIN 1.2 library\"\n \
+if [ ! -f chaplin-1.2.tar ]; then\n \
+  wget --no-verbose http://chaplin.hepforge.org/code/chaplin-1.2.tar || wget https://cms-project-generators.web.cern.ch/cms-project-generators/chaplin-1.2.tar || fail_exit \"Failed to get CHAPLIN tar ball \"\n \
+fi\n \
+tar xvf chaplin-1.2.tar\n \
+cd chaplin-1.2\n \
+./configure --prefix=`pwd`/..\n \
+make install\n \
+cd ..\n \
+head -n -2 Makefile > Makefile.orig\n \
 cat Makefile.orig | sed -e \"s#FASTJET_CONFIG=.\+#FASTJET_CONFIG=$(scram tool info fastjet | grep BASE | cut -d \"=\" -f2)/bin/fastjet-config#g\" | sed -e \"s#\#\ FASTJET_CONFIG#FASTJET_CONFIG#g\" > Makefile\n \
+sed -i -e \"s#INC2LOOP=.\+#INC2LOOP= -I\$(DIR2LOOP) -I\$(CLN_INC_PATH) -I\$(GINAC_INC_PATH)#g\" Makefile\n \
 sed -i -e 's#pwhg_main-$(COMPILER)#pwhg_main#g' Makefile \n \
 sed -i -e 's#-o $@#-o pwhg_main#g' Makefile \n \
-sed -i -e \"s#OL_PATH=.\+#OL_PATH=\$(PWD)/../OpenLoopsStuff/OpenLoops/#g\" Makefile\n \
+sed -i -e \"s#OL_PATH=.\+#OL_PATH=\$(PWD)/../OpenLoopsStuff/OpenLoops2/#g\" Makefile\n \
+sed -i -e \"s#CHAPLIN_LIB_PATH=.\+#CHAPLIN_LIB_PATH=\$(PWD)/lib#g\" Makefile\n \
 sed -i -e 's#/afs/cern.ch/work/a/alioli/private/#$(PWD)/../MATRIXStuff/external/#g' Makefile \n \
 sed -i -e 's#external/cln#external/cln-install#g' Makefile \n \
 sed -i -e 's#external/ginac#external/ginac-install#g' Makefile \n \
