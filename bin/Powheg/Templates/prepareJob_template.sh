@@ -39,12 +39,16 @@ cp -p ${rootfolder}/${folderName}/powheg.input ./
 cp -p ${rootfolder}/${folderName}/JHUGen.input ./
 cp -p ${rootfolder}/${folderName}/*.dat  ./
 cp -p ${rootfolder}/${folderName}/pwhg_main  ./
-export LD_LIBRARY_PATH=`pwd`/lib/:`pwd`/lib64/:$${LD_LIBRARY_PATH}
 if [ -e ${rootfolder}/${folderName}/obj-gfortran/proclib ]; then
   mkdir ./obj-gfortran/
   cp -pr ${rootfolder}/${folderName}/obj-gfortran/proclib  ./obj-gfortran/
   cp -pr ${rootfolder}/${folderName}/obj-gfortran/*.so  ./obj-gfortran/ 
   export LD_LIBRARY_PATH=`pwd`/obj-gfortran/proclib/:$${LD_LIBRARY_PATH}
+fi
+if [ -e ${rootfolder}/${folderName}/lib ]; then
+  mkdir ./lib
+  cp -pr ${rootfolder}/${folderName}/lib/*.so*  ./lib/ 
+  export LD_LIBRARY_PATH=`pwd`/lib/:$${LD_LIBRARY_PATH}
 fi
 if [ -d ${rootfolder}/${folderName} ]; then 
   cp -p ${rootfolder}/${folderName}/*.grid .
