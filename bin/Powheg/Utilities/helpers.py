@@ -247,6 +247,7 @@ make install\n \
 cd ..\n \
 head -n -2 Makefile > Makefile.orig\n \
 cat Makefile.orig | sed -e \"s#FASTJET_CONFIG=.\+#FASTJET_CONFIG=$(scram tool info fastjet | grep BASE | cut -d \"=\" -f2)/bin/fastjet-config#g\" | sed -e \"s#\#\ FASTJET_CONFIG#FASTJET_CONFIG#g\" > Makefile\n \
+sed -i -e \"s#-L\$(GINAC_LIB_PATH) -lginac -L\$(CLN_LIB_PATH)#-L\$(GINAC_LIB_PATH) -Wl,-rpath \$(GINAC_LIB_PATH) -lginac -L\$(CLN_LIB_PATH) -Wl,-rpath \$(CLN_LIB_PATH)#g\" Makefile\n \
 sed -i -e \"s#INC2LOOP=.\+#INC2LOOP= -I\$(DIR2LOOP) -I\$(CLN_INC_PATH) -I\$(GINAC_INC_PATH)#g\" Makefile\n \
 sed -i -e 's#pwhg_main-$(COMPILER)#pwhg_main#g' Makefile \n \
 sed -i -e 's#-o $@#-o pwhg_main#g' Makefile \n \
