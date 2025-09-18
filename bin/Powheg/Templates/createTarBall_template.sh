@@ -86,6 +86,16 @@ else
     sed -e "s/PROCESS/$${process}/g" $${WORKDIR}/runcmsgrid_powheg.sh > runcmsgrid.sh
 fi
 
+### Include needed libs from POWHEG-BOX
+mkdir -p lib
+cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*tuff*/lib/*.so* ./lib
+cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*tuff*/external/*-install/lib/*.so* ./lib
+cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*tuff*/external/*amp*/*.so* ./lib
+cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*/*/lib/*.so* ./lib
+cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*/*/lib/*.a ./lib
+cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*/*/obj-gnu/*.so* ./lib
+cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*/*/obj-gnu/*.a ./lib
+
 sed -i 's/pwggrid.dat ]]/pwggrid.dat ]] || [ -e $${WORKDIR}\/pwggrid-0001.dat ]/g' runcmsgrid.sh
 
 sed -i s/SCRAM_ARCH_VERSION_REPLACE/$${SCRAM_ARCH}/g runcmsgrid.sh
@@ -135,32 +145,13 @@ if [ "$$process" = "X0jj" ] ; then
   exclude_extra="--exclude=MG5_aMC*.tar.gz --exclude=pwgbtildeupb-*.dat  --exclude=pwgremnupb-*.dat --exclude=pwgcounters-st1-*.dat --exclude=pwgcounters-st2-*.dat --exclude=pwgcounters-st3-*.dat --exclude=pwg-*-stat.dat"
 fi
 
-if [ "$$process" = "WWJ" ] ; then
-  echo "Adding MATRIXStuff libs to folderName"
-  cd $${WORKDIR}/$${folderName}
-  mkdir $${WORKDIR}/$${folderName}/MATRIXStuff/external
-  cp -r $${WORKDIR}/$${folderName}/POWHEG-BOX/MATRIXStuff/external/*-install $${WORKDIR}/$${folderName}/MATRIXStuff/external/
-  cp -r $${WORKDIR}/$${folderName}/POWHEG-BOX/MATRIXStuff/external/qqvvamp-1.1 $${WORKDIR}/$${folderName}/MATRIXStuff/external/
-  cp -r $${WORKDIR}/$${folderName}/POWHEG-BOX/MATRIXStuff/lib $${WORKDIR}/$${folderName}/MATRIXStuff/
-  cd -
-fi
-
-
 if [ $$keepTop == '1' ]; then
     echo 'Keeping validation plots.'
     echo 'Packing...' $${WORKDIR}'/'$${process}'_'$${SCRAM_ARCH}'_'$${CMSSW_VERSION}'_'$${folderName}'.tgz'
     tar --exclude=POWHEG-BOX --exclude=powhegbox*.tar.gz --exclude=*.lhe --exclude=run_*.sh --exclude=*temp --exclude=pwgbtlupb-*.dat --exclude=pwgrmupb-*.dat --exclude=run_*.out --exclude=run_*.err --exclude=run_*.log --exclude=minlo-run --exclude=dynnlo* $$exclude_extra -zcf $${WORKDIR}'/'$${process}'_'$${SCRAM_ARCH}'_'$${CMSSW_VERSION}'_'$${folderName}'.tgz' *
 else
-  if [ $$process == "WWJ" ]; then
-    echo 'Preparing WWJ gridpack'
-    echo 'Packing...' $${WORKDIR}'/'$${process}'_'$${SCRAM_ARCH}'_'$${CMSSW_VERSION}'_'$${folderName}'.tgz'
-    tar --exclude=POWHEG-BOX --exclude=powhegbox*.tar.gz --exclude=*.top --exclude=*.lhe --exclude=run_*.sh --exclude=*temp --exclude=pwgbtlupb-*.dat --exclude=pwgrmupb-*.dat --exclude=run_*.out --exclude=run_*.err --exclude=run_*.log --exclude=minlo-run --exclude=dynnlo* -zcf $${WORKDIR}'/'$${process}'_'$${SCRAM_ARCH}'_'$${CMSSW_VERSION}'_'$${folderName}'.tgz' * 
-    echo 'Removing copy of MATRIXStuff'
-    rm -rf $${WORKDIR}/$${folderName}/MATRIXStuff/ 
-  else
     echo 'Packing...' $${WORKDIR}'/'$${process}'_'$${SCRAM_ARCH}'_'$${CMSSW_VERSION}'_'$${folderName}'.tgz'
     tar --exclude=POWHEG-BOX --exclude=powhegbox*.tar.gz --exclude=*.top --exclude=*.lhe --exclude=run_*.sh --exclude=*temp --exclude=pwgbtlupb-*.dat --exclude=pwgrmupb-*.dat --exclude=run_*.out --exclude=run_*.err --exclude=run_*.log --exclude=minlo-run --exclude=dynnlo* $$exclude_extra -zcf $${WORKDIR}'/'$${process}'_'$${SCRAM_ARCH}'_'$${CMSSW_VERSION}'_'$${folderName}'.tgz' *
-  fi
 fi
 
 cd $${WORKDIR}
