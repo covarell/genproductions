@@ -91,10 +91,10 @@ mkdir -p lib
 cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*tuff*/lib/*.so* ./lib
 cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*tuff*/external/*-install/lib/*.so* ./lib
 cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*tuff*/external/*amp*/*.so* ./lib
-cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*/*/lib/*.so* ./lib
-cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*/*/lib/*.a ./lib
-cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*/*/obj-gnu/*.so* ./lib
-cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*/*/obj-gnu/*.a ./lib
+cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/$${process}/*/lib/*.so* ./lib
+cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/$${process}/*/lib/*.a ./lib
+cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/$${process}/*/obj-gnu/*.so* ./lib
+cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/$${process}/*/obj-gnu/*.a ./lib
 
 sed -i 's/pwggrid.dat ]]/pwggrid.dat ]] || [ -e $${WORKDIR}\/pwggrid-0001.dat ]/g' runcmsgrid.sh
 
