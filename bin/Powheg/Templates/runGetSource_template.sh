@@ -157,7 +157,7 @@ sed -i -e "s#/user/gj/lib/#../QCDLoop-1.95/ff/#g" QCDLoop-1.9*/ff/ffinit.f
 sed -i -e "s#FFLAGS  = #FFLAGS  = -std=legacy #g" QCDLoop-1.9/ql/makefile
 sed -i -e "s#FFLAGS = #FFLAGS = -std=legacy #g" QCDLoop-1.9-gfortran/makefile
 sed -i -e "s#FFLAGS        = #FFLAGS        = -std=legacy #g" QCDLoop-1.9-gfortran/ff/makefile
-sed -i -e "s#FFLAGS  = #FFLAGS  = -std=legacy #g" QCDLoop1.9-gfortran/ql/makefile
+sed -i -e "s#FFLAGS  = #FFLAGS  = -std=legacy #g" QCDLoop-1.9-gfortran/ql/makefile
 
 # Find proper histo booking routine (many of them exist)
 BOOK_HISTO="pwhg_bookhist-multi.o"
