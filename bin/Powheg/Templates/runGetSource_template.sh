@@ -153,10 +153,11 @@ sed -i -e "s#FFLAGS        = #FFLAGS        = -std=legacy #g" madgraph/dhelas3.2
 sed -i -e "s#FFLAGS = #FFLAGS = -std=legacy #g" QCDLoop-1.9/makefile
 sed -i -e "s#FFLAGS        = #FFLAGS        = -std=legacy #g" QCDLoop-1.9/ff/makefile
 sed -i -e "s#length-132#length-none#g" QCDLoop-1.9*/ff/makefile
+sed -i -e "s#/user/gj/lib/#../QCDLoop-1.95/ff/#g" QCDLoop-1.9*/ff/ffinit.f
 sed -i -e "s#FFLAGS  = #FFLAGS  = -std=legacy #g" QCDLoop-1.9/ql/makefile
 sed -i -e "s#FFLAGS = #FFLAGS = -std=legacy #g" QCDLoop-1.9-gfortran/makefile
 sed -i -e "s#FFLAGS        = #FFLAGS        = -std=legacy #g" QCDLoop-1.9-gfortran/ff/makefile
-sed -i -e "s#FFLAGS  = #FFLAGS  = -std=legacy #g" QCDLoop-1.9-gfortran/ql/makefile
+sed -i -e "s#FFLAGS  = #FFLAGS  = -std=legacy #g" QCDLoop1.9-gfortran/ql/makefile
 
 # Find proper histo booking routine (many of them exist)
 BOOK_HISTO="pwhg_bookhist-multi.o"
@@ -171,6 +172,15 @@ if [ -d ./Virtual/ ]; then
   cp ./Virtual/creategrid.py* $${WORKDIR}/$${name}/
   cp ./Virtual/Virt*.grid $${WORKDIR}/$${name}/
 fi
+if [ -d ./QCDLoop-1.9 ]; then                                 
+  cp -a ./QCDLoop-1.9 $${WORKDIR}/$${name}/.                    
+  cp -a ./QCDLoop-1.9/ff/ff*.dat $${WORKDIR}/$${name}/.      
+fi
+if [ -d ./QCDLoop-1.95 ]; then                                 
+  cp -a ./QCDLoop-1.95 $${WORKDIR}/$${name}/.                    
+#  cp -a ./QCDLoop-1.95/ff/ff*.dat $${WORKDIR}/$${name}/.      
+fi
+
 
 # Remove ANY kind of analysis with parton shower
 if [ `grep particle_identif pwhg_analysis-dummy.f` = ""]; then
@@ -289,9 +299,10 @@ if [ -d ./obj-gfortran/proclib ]; then
   cp -a ./obj-gfortran/proclib $${WORKDIR}/$${name}/obj-gfortran/.
   cp -a ./obj-gfortran/*.so $${WORKDIR}/$${name}/obj-gfortran/.
 fi
-if [ -d ./QCDLoop-1.9 ]; then                                 
-  cp -a ./QCDLoop-1.9 $${WORKDIR}/$${name}/.                    
-  cp -a ./QCDLoop-1.9/ff/ff*.dat $${WORKDIR}/$${name}/.      
+if [ -d ./obj-gnu/proclib ]; then
+  mkdir $${WORKDIR}/$${name}/obj-gnu/
+  cp -a ./obj-gnu/proclib $${WORKDIR}/$${name}/obj-gnu/.
+  cp -a ./obj-gnu/*.so $${WORKDIR}/$${name}/obj-gnu/.
 fi
 if [ -f main-PHOTOS-lhef ]; then
     echo "copying main-PHOTOS-lhef in the same place as pwhg_main."

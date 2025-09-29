@@ -45,6 +45,12 @@ if [ -e ${rootfolder}/${folderName}/obj-gfortran/proclib ]; then
   cp -pr ${rootfolder}/${folderName}/obj-gfortran/*.so  ./obj-gfortran/ 
   export LD_LIBRARY_PATH=`pwd`/obj-gfortran/proclib/:$${LD_LIBRARY_PATH}
 fi
+if [ -e ${rootfolder}/${folderName}/obj-gnu/proclib ]; then
+  mkdir ./obj-gnu/
+  cp -pr ${rootfolder}/${folderName}/obj-gnu/proclib  ./obj-gnu/
+  cp -pr ${rootfolder}/${folderName}/obj-gnu/*.so  ./obj-gnu/ 
+  export LD_LIBRARY_PATH=`pwd`/obj-gnu/proclib/:$${LD_LIBRARY_PATH}
+fi
 if [ -e ${rootfolder}/${folderName}/lib ]; then
   mkdir ./lib
   cp -pr ${rootfolder}/${folderName}/lib/*.so*  ./lib/ 
