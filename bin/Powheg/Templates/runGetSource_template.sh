@@ -299,11 +299,6 @@ if [ -d ./obj-gfortran/proclib ]; then
   cp -a ./obj-gfortran/proclib $${WORKDIR}/$${name}/obj-gfortran/.
   cp -a ./obj-gfortran/*.so $${WORKDIR}/$${name}/obj-gfortran/.
 fi
-if [ -d ./obj-gnu/proclib ]; then
-  mkdir $${WORKDIR}/$${name}/obj-gnu/
-  cp -a ./obj-gnu/proclib $${WORKDIR}/$${name}/obj-gnu/.
-  cp -a ./obj-gnu/*.so $${WORKDIR}/$${name}/obj-gnu/.
-fi
 if [ -f main-PHOTOS-lhef ]; then
     echo "copying main-PHOTOS-lhef in the same place as pwhg_main."
     cp -p main-PHOTOS-lhef $${WORKDIR}/$${name}/.

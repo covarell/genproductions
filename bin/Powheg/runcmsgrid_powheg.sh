@@ -103,7 +103,7 @@ if [[ -e ${myDir} ]]; then
   mv cmsgrid_final.lhe old_cmsgrid_final.lhe
 fi
 
-export LD_LIBRARY_PATH=`pwd`/lib/:`pwd`/lib64/:`pwd`/obj-gfortran/proclib/:`pwd`/obj-gnu/proclib/:${LD_LIBRARY_PATH}
+export LD_LIBRARY_PATH=`pwd`/lib/:`pwd`/lib64/:`pwd`/obj-gfortran/proclib/:`pwd`/obj-gfortran/:${LD_LIBRARY_PATH}
 # how can this work?
 #if [[ "${process}" == "WWJ" || "${process}" == "WZJ" || "${process}" == "ZZJ" || "${process}" == "ZgamJ" ]]; then
 #  export LD_LIBRARY_PATH=`pwd`/MATRIXStuff/external/ginac-install/lib/:`pwd`/MATRIXStuff/external/cln-install/lib/:`pwd`/MATRIXStuff/lib/ppllll24/:${LD_LIBRARY_PATH}

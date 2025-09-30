@@ -250,6 +250,7 @@ cat Makefile.orig | sed -e \"s#FASTJET_CONFIG=.\+#FASTJET_CONFIG=$(scram tool in
 sed -i -e \"s#-L\$(GINAC_LIB_PATH) -lginac -L\$(CLN_LIB_PATH)#-L\$(GINAC_LIB_PATH) -Wl,-rpath \$(GINAC_LIB_PATH) -lginac -L\$(CLN_LIB_PATH) -Wl,-rpath \$(CLN_LIB_PATH)#g\" Makefile\n \
 sed -i -e \"s#INC2LOOP=.\+#INC2LOOP= -I\$(DIR2LOOP) -I\$(CLN_INC_PATH) -I\$(GINAC_INC_PATH)#g\" Makefile\n \
 sed -i -e 's#pwhg_main-$(COMPILER)#pwhg_main#g' Makefile \n \
+sed -i -e 's#gnu#gfortran#g' Makefile \n \
 sed -i -e 's#-o $@#-o pwhg_main#g' Makefile \n \
 sed -i -e \"s#OL_PATH=.\+#OL_PATH=\$(PWD)/../OpenLoopsStuff/OpenLoops2/#g\" Makefile\n \
 sed -i -e \"s#CHAPLIN_LIB_PATH=.\+#CHAPLIN_LIB_PATH=\$(PWD)/lib#g\" Makefile\n \
