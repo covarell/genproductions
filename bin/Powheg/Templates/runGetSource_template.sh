@@ -203,10 +203,11 @@ sed -i -e "s#FPE[ \t]*=[ \t]*#\#FPE=#g" Makefile
 #  sed -i -e "s#-fno-automatic#-fallow-invalid-boz#g" Makefile
 #fi
 
-## FOR OpenLoops, CHANGE FORTRAN OPTIONS AND REMOVE SILLY BINARY NUMBERS
+## FOR OpenLoops, CHANGE FORTRAN OPTIONS, REMOVE SILLY BINARY NUMBERS AND USE RELATIVE PATHS
 if [[ `grep OpenLoops Makefile` != "" ]]; then
-    sed -i -e "s#proclib ;#proclib f77_flags=-fallow-invalid-boz,-std=legacy,-ffixed-line-length-none,-fno-range-check f90_flags=-fallow-invalid-boz,-std=legacy,-ffixed-line-length-none,-fno-range-check ;#g" Makefile
+    sed -i -e 's#$$(PWD)/$$(OBJ)/proclib ;#./$$(OBJ)/proclib f77_flags=-fallow-invalid-boz,-std=legacy,-ffixed-line-length-none,-fno-range-check f90_flags=-fallow-invalid-boz,-std=legacy,-ffixed-line-length-none,-fno-range-check ;#g' Makefile
     cd ../OpenLoopsStuff/
+    sed -i -e "s#install_path =  os.path.abspath#install_path =  os.path.relpath#g" OpenLoop*/SConstruct
     sed -i -e "/case/ s=B\"00\"=0=g" OpenLoop*/lib_src/openloops/*/*.*90
     sed -i -e "/case/ s=B\"01\"=1=g" OpenLoop*/lib_src/openloops/*/*.*90
     sed -i -e "/case/ s=B\"10\"=2=g" OpenLoop*/lib_src/openloops/*/*.*90
