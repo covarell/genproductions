@@ -245,6 +245,11 @@ cd chaplin-1.2\n \
 ./configure --prefix=`pwd`/..\n \
 make install\n \
 cd ..\n \
+mkdir ggvvamp-1.0/obj-gfortran\n \
+sed -i -e \"s#gnu#gfortran#g\" QCDLoop-1.95/makefile\n \
+sed -i -e \"s#gnu#gfortran#g\" QCDLoop-1.95/ff/makefile\n \
+sed -i -e \"s#gnu#gfortran#g\" QCDLoop-1.95/ql/makefile\n \
+sed -i -e \"s#gnu#gfortran#g\" amplitudes/makefile\n \
 head -n -2 Makefile > Makefile.orig\n \
 cat Makefile.orig | sed -e \"s#FASTJET_CONFIG=.\+#FASTJET_CONFIG=$(scram tool info fastjet | grep BASE | cut -d \"=\" -f2)/bin/fastjet-config#g\" | sed -e \"s#\#\ FASTJET_CONFIG#FASTJET_CONFIG#g\" > Makefile\n \
 sed -i -e \"s#-L\$(GINAC_LIB_PATH) -lginac -L\$(CLN_LIB_PATH)#-L\$(GINAC_LIB_PATH) -Wl,-rpath \$(GINAC_LIB_PATH) -lginac -L\$(CLN_LIB_PATH) -Wl,-rpath \$(CLN_LIB_PATH)#g\" Makefile\n \
