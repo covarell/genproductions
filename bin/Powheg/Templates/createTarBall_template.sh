@@ -94,6 +94,7 @@ cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/*tuff*/external/*amp*/*.so* ./lib
 cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/$${process}/*/lib/*.so* ./lib
 cp -p $${WORKDIR}/$$folderName/POWHEG-BOX/$${process}/*/lib/*.a ./lib
 cp -r $${WORKDIR}/$$folderName/POWHEG-BOX/$${process}/obj-gfortran . 
+cp -pr $${WORKDIR}/$$folderName/POWHEG-BOX/OpenLoopsStuff/OpenLoop*/obj-gfortran/* ./obj-gfortran
 
 sed -i 's/pwggrid.dat ]]/pwggrid.dat ]] || [ -e $${WORKDIR}\/pwggrid-0001.dat ]/g' runcmsgrid.sh
 
